@@ -1,24 +1,34 @@
 import React, { PropTypes } from 'react';
+import { Record } from 'immutable';
 import { render } from 'react-dom';
 import { createStore } from 'redux';
 import { connect, Provider } from 'react-redux';
 
+const InitialState = Record({ counter: 0 });
+const initialState = new InitialState;
+
+const revive = (data) => initialState.merge({ counter: data.counter });
+
 const reducer = (state, action) => {
+  if (!(state instanceof InitialState)) {
+    return revive(state);
+  }
+
   switch (action.type) {
     case 'INCREMENT':
-      return { ...state, counter: state.counter + 1 };
+      return state.set('counter', state.get('counter') + 1);
     case 'DECREMENT':
-      return { ...state, counter: state.counter - 1 };
+      return state.set('counter', state.get('counter') - 1);
     default:
       return state;
     }
 };
 
-const store = createStore(reducer, { counter: 0 });
+const store = createStore(reducer, initialState);
 
 class Counter extends React.Component {
   static propTypes = {
-    counter: PropTypes.Number,
+    counter: PropTypes.number,
     onIncrement: PropTypes.func,
     onDecrement: PropTypes.func
   };
@@ -37,7 +47,7 @@ class Counter extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return state;
+  return { ...state.toObject() };
 };
 const mapDispatchToProps = (dispatch) => {
   return {

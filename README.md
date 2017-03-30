@@ -1,5 +1,7 @@
 # react-redux-example
-React Redux implementation example for the blog post purpose
+React Redux implementation (with improvements) example for the blog post purpose.
+
+Link to the blog post [PL]: [Usprawnienia Redux – zróbmy to trochę lepiej](https://nafrontendzie.pl/usprawnienia-redux-zrobmy-lepiej/)
 
 To run the example:
 
