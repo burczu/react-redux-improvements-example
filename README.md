@@ -17,4 +17,4 @@ yarn
 yarn start
 ```
 
-Then, open [http://localhost:8100](http://localhost8100).
+Then, open [http://localhost:8100](http://localhost:8100).
